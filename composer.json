@@ -1,7 +1,6 @@
 {
     "require": {
         "twig/twig": "~2.4",
-        "twbs/bootstrap": "^3.3",
         "symfony/routing": "^3.3",
         "symfony/http-foundation": "^3.3"
     },
