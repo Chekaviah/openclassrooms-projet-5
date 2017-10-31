@@ -1,9 +1,11 @@
 <?php
 
+namespace Blog\Controllers;
+
 abstract class AbstractController
 {
 
-	protected $_view_vars;
+	protected $_view_vars = [];
 
 	protected function set($name, $value)
 	{
