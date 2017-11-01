@@ -6,9 +6,14 @@ use PDO;
 
 class MysqlConnector
 {
+	/** @var PDO $connection  */
 	private $connection = null;
-	private $config;
 	public $assoc = PDO::FETCH_ASSOC;
+	private $host;
+	private $port;
+	private $dbname;
+	private $username;
+	private $password;
 
 	public function __construct()
 	{
@@ -25,13 +30,12 @@ class MysqlConnector
 		if($this->connection == null)
 			$this->connect();
 
-		$result = $this->connection->query($query);
-		return $result;
+		$stmt = $this->connection->prepare($query);
+		return $stmt;
 	}
 
 	private function connect()
 	{
-		var_dump($this->host);
 		try {
 			$this->connection = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->username, $this->password);
 			$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
