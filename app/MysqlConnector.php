@@ -1,21 +1,23 @@
 <?php
 
-namespace Blog\Connectors;
+namespace App;
 
 use PDO;
 
 class MysqlConnector
 {
 	private $connection = null;
+	private $config;
 	public $assoc = PDO::FETCH_ASSOC;
 
 	public function __construct()
 	{
-		$this->MYSQL_HOST = MYSQL_HOST;
-		$this->MYSQL_PORT = MYSQL_PORT;
-		$this->MYSQL_DBNAME = MYSQL_DBNAME;
-		$this->MYSQL_USERNAME = MYSQL_USERNAME;
-		$this->MYSQL_PASSWORD = MYSQL_PASSWORD;
+		$config = Config::getInstance();
+		$this->host = $config->get('MYSQL_HOST');
+		$this->port = $config->get('MYSQL_PORT');
+		$this->dbname = $config->get('MYSQL_DBNAME');
+		$this->username = $config->get('MYSQL_USERNAME');
+		$this->password = $config->get('MYSQL_PASSWORD');
 	}
 
 	public function query($query)
@@ -29,8 +31,9 @@ class MysqlConnector
 
 	private function connect()
 	{
+		var_dump($this->host);
 		try {
-			$this->connection = new PDO("mysql:host=$this->MYSQL_HOST;dbname=$this->MYSQL_DBNAME", $this->MYSQL_USERNAME, $this->MYSQL_PASSWORD);
+			$this->connection = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->username, $this->password);
 			$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch (\PDOException $e) {
 			echo $e->getTraceAsString();
