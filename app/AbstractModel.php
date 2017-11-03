@@ -1,6 +1,6 @@
 <?php
 
-namespace Blog\Models;
+namespace App;
 
 abstract class AbstractModel
 {

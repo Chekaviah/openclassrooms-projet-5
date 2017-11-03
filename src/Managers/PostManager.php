@@ -13,7 +13,7 @@ class PostManager extends AbstractModel
 
 	public function __construct()
 	{
-		$this->connector = new MysqlConnector();
+		$this->connector = MysqlConnector::getInstance();
 	}
 
 	public function getPost()
