@@ -8,6 +8,7 @@ class MysqlConnector
 {
 	/** @var PDO $connection  */
 	private $connection = null;
+	private static $_instance;
 	public $assoc = PDO::FETCH_ASSOC;
 	private $host;
 	private $port;
@@ -15,7 +16,15 @@ class MysqlConnector
 	private $username;
 	private $password;
 
-	public function __construct()
+	public static function getInstance()
+	{
+		if(is_null(self::$_instance))
+			self::$_instance = new MysqlConnector();
+
+		return self::$_instance;
+	}
+
+	private function __construct()
 	{
 		$config = Config::getInstance();
 		$this->host = $config->get('MYSQL_HOST');
