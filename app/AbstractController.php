@@ -1,10 +1,8 @@
 <?php
-
-namespace Blog\Controllers;
+namespace App;
 
 abstract class AbstractController
 {
-
 	protected $_view_vars = [];
 
 	protected function set($name, $value)
