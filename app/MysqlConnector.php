@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use PDO;
@@ -34,13 +33,18 @@ class MysqlConnector
 		$this->password = $config->get('MYSQL_PASSWORD');
 	}
 
-	public function query($query)
+	public function prepare($query)
 	{
 		if($this->connection == null)
 			$this->connect();
 
 		$stmt = $this->connection->prepare($query);
 		return $stmt;
+	}
+
+	public function getLastId()
+	{
+		return $this->connection->lastInsertId();
 	}
 
 	private function connect()

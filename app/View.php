@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +15,7 @@ class View
 		));
 		$twig->addExtension(new Twig_Extension_Debug());
 
+		$vars = array_merge($vars, ['csrf' => $_SESSION['csrf']]);
 		$template = $twig->render($template, $vars);
 
 		return new Response($template);

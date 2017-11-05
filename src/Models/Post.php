@@ -1,5 +1,4 @@
 <?php
-
 namespace Blog\Models;
 
 class Post
@@ -9,7 +8,6 @@ class Post
 	private $title;
 	private $header;
 	private $content;
-	private $url;
 	private $publication;
 	private $last_update;
 
@@ -79,22 +77,6 @@ class Post
 	public function setContent($content)
 	{
 		$this->content = $content;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getUrl()
-	{
-		return $this->url;
-	}
-
-	/**
-	 * @param mixed $url
-	 */
-	public function setUrl($url)
-	{
-		$this->url = $url;
 	}
 
 	/**

@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use Swift_Mailer;

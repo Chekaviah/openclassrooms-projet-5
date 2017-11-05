@@ -9,6 +9,10 @@ body {
 	overflow-x: hidden;
 }
 
+.xdebug-var-dump {
+	margin-top: 100px;
+}
+
 p {
 	font-size: 20px;
 }
@@ -592,5 +596,18 @@ fieldset[disabled] .btn-success.active {
 .portfolio-modal .modal-backdrop {
 	opacity: 0;
 	display: none;
+}
+
+
+/**
+ *	POST CREATE
+ */
+
+#post-create {
+	padding-top: 200px;
+}
+
+#post-create form {
+	margin-top: 50px;
 }
 
