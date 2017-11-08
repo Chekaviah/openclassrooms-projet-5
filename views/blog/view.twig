@@ -20,8 +20,12 @@
                         </p>
                     </div>
                     <div class="post-details">
-                        <p>Publié le {{ post.publication|date("d/m/Y") }}</p>
+                        <p>Publié le {{ post.publication|date("d/m/Y") }} par <u>{{ post.author }}</u></p>
                         <p>{% if post.publication|date('Ymd') < post.lastupdate|date('Ymd') %}Dernière édition le {{ post.lastupdate|date("d/m/Y") }}{% endif %}</p>
+                        <hr>
+                        <p class="text-right">
+                            <a href="/edit/{{ post.id }}" class="btn btn-sm btn-default">Editer ce post</a>
+                        </p>
                     </div>
                 </div>
             </div>

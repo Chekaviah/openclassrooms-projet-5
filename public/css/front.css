@@ -604,15 +604,24 @@ fieldset[disabled] .btn-success.active {
 
 
 /**
- *	POST CREATE
+ *	POST CREATE / EDIT
  */
 
-#post-create {
+#post-create,
+#post-edit {
 	padding-top: 200px;
 }
 
-#post-create form {
+#post-create form,
+#post-edit form {
 	margin-top: 50px;
+}
+
+#post-create textarea,
+#post-edit textarea {
+	width: 100%;
+	max-width: 100%;
+	min-width: 100%;
 }
 
 
