@@ -15,6 +15,29 @@ class PostManager extends AbstractManager
 		$this->connector = MysqlConnector::getInstance();
 	}
 
+	public function getAllPosts()
+	{
+		$sql = "SELECT * FROM blog";
+		$stmt = $this->connector->prepare($sql);
+		$stmt->execute();
+
+		$r = [];
+		while($l = $stmt->fetch()) {
+			$post = new Post();
+			$post->setId($l['id']);
+			$post->setTitle($l['title']);
+			$post->setHeader($l['header']);
+			$post->setContent($l['content']);
+			$post->setAuthor($l['author']);
+			$post->setPublication($l['publication']);
+			$post->setLastUpdate($l['last_update']);
+
+			$r[] = $post;
+		}
+
+		return $r;
+	}
+
 	public function getPostById($id)
 	{
 		if($id != 0 && !filter_var($id, FILTER_VALIDATE_INT))
