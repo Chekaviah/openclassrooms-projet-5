@@ -7,6 +7,7 @@ use Blog\Controllers\BlogController;
 $routes = new RouteCollection();
 
 $routes->add('home', new Route('/', array('_controller' => array(new BlogController(), 'home'))));
+$routes->add('blog', new Route('/blog', array('_controller' => array(new BlogController(), 'blog'))));
 $routes->add('view', new Route('/view/{id}', array('_controller' => array(new BlogController(), 'view'))));
 $routes->add('edit', new Route('/edit/{id}', array('_controller' => array(new BlogController(), 'edit'))));
 $routes->add('create', new Route('/create', array('_controller' => array(new BlogController(), 'create'))));

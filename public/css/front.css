@@ -604,11 +604,12 @@ fieldset[disabled] .btn-success.active {
 
 
 /**
- *	POST CREATE / EDIT
+ *	CUSTOM
  */
 
 #post-create,
-#post-edit {
+#post-edit,
+#post-list {
 	padding-top: 200px;
 }
 
@@ -624,11 +625,6 @@ fieldset[disabled] .btn-success.active {
 	min-width: 100%;
 }
 
-
-/**
- *	POST VIEW
- */
-
 .post-content {
 	margin: 50px 0;
 }
@@ -638,4 +634,35 @@ fieldset[disabled] .btn-success.active {
 	font-weight: 600;
 	color: #777;
 	margin: 0;
+}
+
+.post-link {
+	display: inline-block;
+	margin-top: 20px;
+}
+
+.post-link:hover {
+	background-color: #f5f5f5;
+	text-decoration: none;
+}
+
+.post-item {
+	padding: 15px;
+	color: #333;
+}
+
+.post-title h4 {
+	margin-top: 0;
+	padding-bottom: 5px;
+	border-bottom: 2px solid #2C3E50;
+}
+
+.post-publication {
+	font-weight: bold;
+	color: #777;
+}
+
+.post-author {
+	color: #18BC9C;
+	text-decoration: underline;
 }

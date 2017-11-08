@@ -23,6 +23,14 @@ class BlogController extends AbstractController
 		return View::render('blog/home.twig', $this->getVars());
 	}
 
+	public function blog()
+	{
+		$posts = $this->PostManager->getAllPosts();
+
+		$this->set('posts', $posts);
+		return View::render('blog/blog.twig', $this->getVars());
+	}
+
 	public function view(Request $request)
 	{
 		$id = $request->attributes->get("id");
