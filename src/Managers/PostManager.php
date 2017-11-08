@@ -1,11 +1,11 @@
 <?php
 namespace Blog\Managers;
 
-use App\AbstractModel;
+use App\AbstractManager;
 use App\MysqlConnector;
 use Blog\Models\Post;
 
-class PostManager extends AbstractModel
+class PostManager extends AbstractManager
 {
 
 	private $connector;
@@ -17,7 +17,8 @@ class PostManager extends AbstractModel
 
 	public function getPostById($id)
 	{
-		$id = filter_var($id, FILTER_VALIDATE_INT);
+		if($id != 0 && !filter_var($id, FILTER_VALIDATE_INT))
+			return null;
 
 		$sql = "SELECT * FROM blog WHERE id = :id";
 		$stmt = $this->connector->prepare($sql);
@@ -60,6 +61,6 @@ class PostManager extends AbstractModel
 
 		$id = $this->connector->getLastId();
 
-		return $this->getPostById($id);
+		return $id;
 	}
 }

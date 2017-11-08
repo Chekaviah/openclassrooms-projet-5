@@ -503,6 +503,10 @@ fieldset[disabled] .btn-success.active {
 	line-height: 45px;
 }
 
+.btn-social .fa {
+	line-height: inherit;
+}
+
 .btn:focus,
 .btn:active,
 .btn.active {
@@ -611,3 +615,18 @@ fieldset[disabled] .btn-success.active {
 	margin-top: 50px;
 }
 
+
+/**
+ *	POST VIEW
+ */
+
+.post-content {
+	margin: 50px 0;
+}
+
+.post-details p {
+	font-size: 15px;
+	font-weight: 600;
+	color: #777;
+	margin: 0;
+}
