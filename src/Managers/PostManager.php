@@ -64,4 +64,16 @@ class PostManager extends AbstractManager
 
 		return $id;
 	}
+
+	public function editPost($id, $title, $header, $content, $author)
+	{
+		$sql = "UPDATE blog SET title = :title, header = :header, content = :content, author = :author WHERE id = :id";
+		$stmt = $this->connector->prepare($sql);
+		$stmt->bindParam(":id", $id);
+		$stmt->bindParam(":title", $title);
+		$stmt->bindParam(":header", $header);
+		$stmt->bindParam(":content", $content);
+		$stmt->bindParam(":author", $author);
+		$stmt->execute();
+	}
 }
