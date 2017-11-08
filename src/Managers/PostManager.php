@@ -26,11 +26,15 @@ class PostManager extends AbstractManager
 
 		$l = $stmt->fetch();
 
+		if(!$l)
+			return null;
+
 		$post = new Post();
 		$post->setId($l['id']);
 		$post->setTitle($l['title']);
 		$post->setHeader($l['header']);
 		$post->setContent($l['content']);
+		$post->setAuthor($l['author']);
 		$post->setPublication($l['publication']);
 		$post->setLastUpdate($l['last_update']);
 
@@ -46,17 +50,14 @@ class PostManager extends AbstractManager
 		return $post;
 	}
 
-	public function createPost($title, $header, $content)
+	public function createPost($title, $header, $content, $author)
 	{
-		$title = filter_var($title, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$header = filter_var($header, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$content = filter_var($content, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-		$sql = "INSERT INTO blog (title, header, content) VALUES (:title, :header, :content)";
+		$sql = "INSERT INTO blog (title, header, content, author) VALUES (:title, :header, :content, :author)";
 		$stmt = $this->connector->prepare($sql);
 		$stmt->bindParam(":title", $title);
 		$stmt->bindParam(":header", $header);
 		$stmt->bindParam(":content", $content);
+		$stmt->bindParam(":author", $author);
 		$stmt->execute();
 
 		$id = $this->connector->getLastId();

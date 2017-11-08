@@ -29,13 +29,13 @@ class BlogController extends AbstractController
 
 		$post = $this->PostManager->getPostById($id);
 		if(empty($post))
-			return new Response("Incomplete form", 403);
+			return new Response("Post not found", 404);
 
 		$this->set('post', $post);
 
 		return View::render('blog/view.twig', $this->getVars());
 	}
-
+	
 	public function create()
 	{
 		return View::render('blog/create.twig', $this->getVars());
@@ -43,13 +43,13 @@ class BlogController extends AbstractController
 
 	public function createPost()
 	{
-		if(empty($_POST) || empty($_POST['title']) || empty($_POST['header']) || empty($_POST['content']))
+		if(empty($_POST) || empty($_POST['title']) || empty($_POST['header']) || empty($_POST['content']) || empty($_POST['author']))
 			return new Response("Incomplete form", 403);
 
 		if(empty($_POST['csrf']) || ($_SESSION['csrf'] != $_POST['csrf']))
 			return new Response("CSRF Attack", 403);
 
-		$id = $this->PostManager->createPost($_POST['title'], $_POST['header'], $_POST['content']);
+		$id = $this->PostManager->createPost($_POST['title'], $_POST['header'], $_POST['content'], $_POST['author']);
 
 		return new RedirectResponse('/view/'.$id);
 	}

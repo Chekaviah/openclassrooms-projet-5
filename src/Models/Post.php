@@ -8,6 +8,7 @@ class Post
 	private $title;
 	private $header;
 	private $content;
+	private $author;
 	private $publication;
 	private $last_update;
 
@@ -77,6 +78,22 @@ class Post
 	public function setContent($content)
 	{
 		$this->content = $content;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getAuthor()
+	{
+		return $this->author;
+	}
+
+	/**
+	 * @param mixed $author
+	 */
+	public function setAuthor($author)
+	{
+		$this->author = $author;
 	}
 
 	/**

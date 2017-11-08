@@ -26,6 +26,10 @@
 							<label for="post-content">Post</label>
 							<textarea id="post-content" name="content" class="form-control" rows="3" required></textarea>
 						</div>
+						<div class="form-group">
+							<label for="post-author">Auteur</label>
+							<input type="text" id="post-author" name="author" class="form-control" required>
+						</div>
 						<div class="text-center">
 							<input type="hidden" name="csrf" value="{{ csrf }}">
 							<button type="submit" class="btn btn-default">Créer le post</button>
