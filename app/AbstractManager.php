@@ -1,7 +1,7 @@
 <?php
 namespace App;
 
-abstract class AbstractModel
+abstract class AbstractManager
 {
 	private static $instances = array();
 
