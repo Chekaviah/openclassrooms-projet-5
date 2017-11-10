@@ -37,7 +37,13 @@ $matcher = new UrlMatcher($routes, $context);
 
 try {
 	$request->attributes->add($matcher->match($request->getPathInfo()));
-	$response = call_user_func($request->attributes->get('_controller'), $request);
+
+	$csrf_token = $request->request->get('csrf');
+	if($request->getMethod() == 'POST' && (!$csrf_token || $csrf_token != $_SESSION['csrf'])) {
+		$response = new Response("CSRF Attack", 403);
+	} else {
+		$response = call_user_func($request->attributes->get('_controller'), $request);
+	}
 } catch (ResourceNotFoundException $e) {
 	$response = new Response('Not Found', 404);
 } catch (Exception $e) {
