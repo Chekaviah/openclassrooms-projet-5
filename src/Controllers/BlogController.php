@@ -2,6 +2,7 @@
 namespace Blog\Controllers;
 
 use App\AbstractController;
+use App\Mailer;
 use App\View;
 use Blog\Managers\PostManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -12,10 +13,12 @@ class BlogController extends AbstractController
 {
 
 	private $PostManager;
+	private $Mailer;
 
 	public function __construct()
 	{
 		$this->PostManager = PostManager::getInstance();
+		$this->Mailer = Mailer::getInstance();
 	}
 
 	public function home()
@@ -62,29 +65,36 @@ class BlogController extends AbstractController
 		return View::render('blog/create.twig', $this->getVars());
 	}
 
-	public function createPost()
+	public function createPost(Request $request)
 	{
-		if(empty($_POST) || empty($_POST['title']) || empty($_POST['header']) || empty($_POST['content']) || empty($_POST['author']))
+		if(!$request->request->get("title") || !$request->request->get("header") || !$request->request->get("content") || !$request->request->get("author"))
 			return new Response("Incomplete form", 403);
 
-		if(empty($_POST['csrf']) || ($_SESSION['csrf'] != $_POST['csrf']))
-			return new Response("CSRF Attack", 403);
-
-		$id = $this->PostManager->createPost($_POST['title'], $_POST['header'], $_POST['content'], $_POST['author']);
+		$id = $this->PostManager->createPost($request->request->all());
 
 		return new RedirectResponse('/view/'.$id);
 	}
 
-	public function editPost()
+	public function editPost(Request $request)
 	{
-		if(empty($_POST) || empty($_POST['id']) || empty($_POST['title']) || empty($_POST['header']) || empty($_POST['content']) || empty($_POST['author']))
+		if(!$request->request->get("id") || !$request->request->get("title") || !$request->request->get("header") || !$request->request->get("content") || !$request->request->get("author"))
 			return new Response("Incomplete form", 403);
 
-		if(empty($_POST['csrf']) || ($_SESSION['csrf'] != $_POST['csrf']))
-			return new Response("CSRF Attack", 403);
+		$id = $request->request->get("id");
 
-		$id = $this->PostManager->editPost($_POST['id'], $_POST['title'], $_POST['header'], $_POST['content'], $_POST['author']);
+		$this->PostManager->editPost($request->request->all());
 
-		return new RedirectResponse('/view/'.$_POST['id']);
+		return new RedirectResponse('/view/'.$id);
+	}
+
+	public function mailPost(Request $request)
+	{
+		if(empty($_POST) || empty($_POST['name']) || empty($_POST['email']) || empty($_POST['message']))
+			return new Response("Incomplete form", 403);
+
+		$mail = $this->Mailer->prepareMail($request->request->all());
+		$this->Mailer->sendMail($mail);
+
+		return View::render('blog/mail.twig', $this->getVars());
 	}
 }

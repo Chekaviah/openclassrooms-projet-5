@@ -29,14 +29,18 @@ class Mailer
 		$this->mailer = new Swift_Mailer($transport);
 	}
 
-	public function prepareMail($from, $name, $message)
+	public function prepareMail($args)
 	{
-		$message = (new Swift_Message('Formulaire de contact'))
+		$from = filter_var($args['email'], FILTER_SANITIZE_EMAIL);
+		$name = filter_var($args['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		$content = filter_var($args['message'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+		$mail = (new Swift_Message('Formulaire de contact'))
 			->setFrom([$from => $name])
 			->setTo([$this->config->get('MAIL_TO')])
-			->setBody($message);
+			->setBody($content);
 
-		return $message;
+		return $mail;
 	}
 
 	public function sendMail(Swift_Message $mail)
