@@ -29,6 +29,11 @@ class Mailer
 		$this->mailer = new Swift_Mailer($transport);
 	}
 
+	/**
+	 * Prepare mail before sending. Return false if mail is incorrect
+	 * @param $args
+	 * @return Swift_Message|bool
+	 */
 	public function prepareMail($args)
 	{
 		$from = filter_var($args['email'], FILTER_VALIDATE_EMAIL);
@@ -45,6 +50,11 @@ class Mailer
 		return $mail;
 	}
 
+	/**
+	 * Send a prepared mail
+	 * @param Swift_Message $mail
+	 * @return int
+	 */
 	public function sendMail(Swift_Message $mail)
 	{
 		return $this->mailer->send($mail);

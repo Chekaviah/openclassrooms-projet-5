@@ -8,6 +8,12 @@ use Twig_Loader_Filesystem;
 
 class View
 {
+	/**
+	 * Render twig templates
+	 * @param $template
+	 * @param array $vars
+	 * @return Response
+	 */
 	public static function render($template, $vars = []) {
 		$loader = new Twig_Loader_Filesystem(APP_ROOT.'views');
 		$twig = new Twig_Environment($loader, array(

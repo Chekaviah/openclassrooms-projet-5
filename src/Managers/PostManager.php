@@ -15,6 +15,10 @@ class PostManager extends AbstractManager
 		$this->connector = MysqlConnector::getInstance();
 	}
 
+	/**
+	 * Get all blog posts
+	 * @return array
+	 */
 	public function getAllPosts()
 	{
 		$sql = "SELECT * FROM blog";
@@ -40,6 +44,11 @@ class PostManager extends AbstractManager
 		return $r;
 	}
 
+	/**
+	 * Get blog post by id
+	 * @param $id
+	 * @return Post|null
+	 */
 	public function getPostById($id)
 	{
 		if(filter_var($id, FILTER_VALIDATE_INT) === false)
@@ -68,6 +77,11 @@ class PostManager extends AbstractManager
 		return $post;
 	}
 
+	/**
+	 * Create a blog post
+	 * @param array $args
+	 * @return string
+	 */
 	public function createPost($args)
 	{
 		$sql = "INSERT INTO blog (title, header, content, author) VALUES (:title, :header, :content, :author)";
@@ -83,6 +97,10 @@ class PostManager extends AbstractManager
 		return $id;
 	}
 
+	/**
+	 * Edit a blog post
+	 * @param array $args
+	 */
 	public function editPost($args)
 	{
 		$sql = "UPDATE blog SET title = :title, header = :header, content = :content, author = :author WHERE id = :id";

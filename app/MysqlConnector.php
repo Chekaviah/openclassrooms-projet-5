@@ -42,6 +42,10 @@ class MysqlConnector
 		return $stmt;
 	}
 
+	/**
+	 * Get the last inserted id
+	 * @return string
+	 */
 	public function getLastId()
 	{
 		return $this->connection->lastInsertId();

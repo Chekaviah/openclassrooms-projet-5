@@ -21,11 +21,19 @@ class BlogController extends AbstractController
 		$this->Mailer = Mailer::getInstance();
 	}
 
+	/**
+	 * Homepage
+	 * @return Response
+	 */
 	public function home()
 	{
 		return View::render('blog/home.twig', $this->getVars());
 	}
 
+	/**
+	 * Blog page: list all blog posts
+	 * @return Response
+	 */
 	public function blog()
 	{
 		$posts = $this->PostManager->getAllPosts();
@@ -34,6 +42,11 @@ class BlogController extends AbstractController
 		return View::render('blog/blog.twig', $this->getVars());
 	}
 
+	/**
+	 * Blog post page
+	 * @param Request $request
+	 * @return Response
+	 */
 	public function view(Request $request)
 	{
 		$id = $request->attributes->get("id");
@@ -47,6 +60,11 @@ class BlogController extends AbstractController
 		return View::render('blog/view.twig', $this->getVars());
 	}
 
+	/**
+	 * Blog post edit page
+	 * @param Request $request
+	 * @return Response
+	 */
 	public function edit(Request $request)
 	{
 		$id = $request->attributes->get("id");
@@ -60,11 +78,20 @@ class BlogController extends AbstractController
 		return View::render('blog/edit.twig', $this->getVars());
 	}
 
+	/**
+	 * Blog post create page
+	 * @return Response
+	 */
 	public function create()
 	{
 		return View::render('blog/create.twig', $this->getVars());
 	}
 
+	/**
+	 * Blog post create form submission
+	 * @param Request $request
+	 * @return RedirectResponse|Response
+	 */
 	public function createPost(Request $request)
 	{
 		if(!$request->request->get("title") || !$request->request->get("header") || !$request->request->get("content") || !$request->request->get("author"))
@@ -75,6 +102,11 @@ class BlogController extends AbstractController
 		return new RedirectResponse('/view/'.$id);
 	}
 
+	/**
+	 * Blog post edit form submission
+	 * @param Request $request
+	 * @return RedirectResponse|Response
+	 */
 	public function editPost(Request $request)
 	{
 		if(!$request->request->get("id") || !$request->request->get("title") || !$request->request->get("header") || !$request->request->get("content") || !$request->request->get("author"))
@@ -87,6 +119,11 @@ class BlogController extends AbstractController
 		return new RedirectResponse('/view/'.$id);
 	}
 
+	/**
+	 * Contact form submission
+	 * @param Request $request
+	 * @return Response
+	 */
 	public function mailPost(Request $request)
 	{
 		if(empty($_POST) || empty($_POST['name']) || empty($_POST['email']) || empty($_POST['message']))

@@ -1,6 +1,10 @@
 <?php
 namespace Blog\Models;
 
+/**
+ * Post Model
+ * @package Blog\Models
+ */
 class Post
 {
 

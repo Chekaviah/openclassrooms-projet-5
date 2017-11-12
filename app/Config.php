@@ -19,6 +19,10 @@ class Config
 		$this->settings = require APP_ROOT . 'config/config.php';
 	}
 
+	/**
+	 * @param $key
+	 * @return mixed|null
+	 */
 	public function get($key)
 	{
 		if(!isset($this->settings[$key]))
