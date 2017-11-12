@@ -92,8 +92,14 @@ class BlogController extends AbstractController
 		if(empty($_POST) || empty($_POST['name']) || empty($_POST['email']) || empty($_POST['message']))
 			return new Response("Incomplete form", 403);
 
+		$status = false;
+
 		$mail = $this->Mailer->prepareMail($request->request->all());
-		$this->Mailer->sendMail($mail);
+		if($mail)
+			$status = $this->Mailer->sendMail($mail);
+
+		$this->set('mail', $request->request->all());
+		$this->set('status', $status);
 
 		return View::render('blog/mail.twig', $this->getVars());
 	}

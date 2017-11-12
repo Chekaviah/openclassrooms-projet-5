@@ -42,7 +42,7 @@ class PostManager extends AbstractManager
 
 	public function getPostById($id)
 	{
-		if($id != 0 && !filter_var($id, FILTER_VALIDATE_INT))
+		if(filter_var($id, FILTER_VALIDATE_INT) === false)
 			return null;
 
 		$sql = "SELECT * FROM blog WHERE id = :id";

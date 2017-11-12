@@ -13,7 +13,6 @@
             </div>
             <div class="row">
                 {% for post in posts %}
-                {% for i in 0..10 %}
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                         <a class="post-link" href="/view/{{ post.id }}">
                             <div class="post-item">
@@ -23,7 +22,6 @@
                             </div>
                         </a>
                     </div>
-                {% endfor %}
                 {% endfor %}
             </div>
         </div>

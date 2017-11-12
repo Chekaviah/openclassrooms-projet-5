@@ -31,9 +31,11 @@ class Mailer
 
 	public function prepareMail($args)
 	{
-		$from = filter_var($args['email'], FILTER_SANITIZE_EMAIL);
-		$name = filter_var($args['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$content = filter_var($args['message'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		$from = filter_var($args['email'], FILTER_VALIDATE_EMAIL);
+		$name = $args['name'];
+		$content = $args['message'];
+		if(!$from)
+			return false;
 
 		$mail = (new Swift_Message('Formulaire de contact'))
 			->setFrom([$from => $name])

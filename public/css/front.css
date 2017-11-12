@@ -610,7 +610,8 @@ fieldset[disabled] .btn-success.active {
 
 #post-create,
 #post-edit,
-#post-list {
+#post-list,
+#mail {
 	padding-top: 200px;
 }
 
@@ -640,6 +641,7 @@ fieldset[disabled] .btn-success.active {
 .post-link {
 	display: inline-block;
 	margin-top: 20px;
+	width: 100%;
 }
 
 .post-link:hover {
@@ -670,4 +672,8 @@ fieldset[disabled] .btn-success.active {
 
 #contact-form .btn-success {
 	margin-top: 20px;
+}
+
+#mail .btn {
+	margin-top: 70px;
 }

@@ -133,23 +133,24 @@
 					<div class="row control-group">
 						<div class="form-group col-xs-12 floating-label-form-group controls">
 							<label>Nom</label>
-							<input type="text" class="form-control" placeholder="Nom" id="name" required>
+							<input type="text" class="form-control" placeholder="Nom" id="name" name="name" required>
 						</div>
 					</div>
 					<div class="row control-group">
 						<div class="form-group col-xs-12 floating-label-form-group controls">
 							<label>Adresse mail</label>
-							<input type="email" class="form-control" placeholder="Adresse mail" id="email">
+							<input type="email" class="form-control" placeholder="Adresse mail" id="email" name="email">
 						</div>
 					</div>
 					<div class="row control-group">
 						<div class="form-group col-xs-12 floating-label-form-group controls">
 							<label>Message</label>
-							<textarea rows="5" class="form-control" placeholder="Message" id="message"></textarea>
+							<textarea rows="5" class="form-control" placeholder="Message" id="message" name="message"></textarea>
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-xs-12 text-center">
+							<input type="hidden" name="csrf" value="{{ csrf }}">
 							<button type="submit" class="btn btn-success btn-lg">Envoyer</button>
 						</div>
 					</div>
