@@ -35,12 +35,14 @@ class PostManager extends AbstractManager
 			$r[] = $post;
 		}
 
+		$stmt->closeCursor();
+
 		return $r;
 	}
 
 	public function getPostById($id)
 	{
-		if($id != 0 && !filter_var($id, FILTER_VALIDATE_INT))
+		if(filter_var($id, FILTER_VALIDATE_INT) === false)
 			return null;
 
 		$sql = "SELECT * FROM blog WHERE id = :id";
@@ -61,26 +63,19 @@ class PostManager extends AbstractManager
 		$post->setPublication($l['publication']);
 		$post->setLastUpdate($l['last_update']);
 
-		/*
-		$post = (new PostBuilder())
-						->setId($l['id'])
-						->setTitle($l['title'])
-						->build();
-		*/
-
 		$stmt->closeCursor();
 
 		return $post;
 	}
 
-	public function createPost($title, $header, $content, $author)
+	public function createPost($args)
 	{
 		$sql = "INSERT INTO blog (title, header, content, author) VALUES (:title, :header, :content, :author)";
 		$stmt = $this->connector->prepare($sql);
-		$stmt->bindParam(":title", $title);
-		$stmt->bindParam(":header", $header);
-		$stmt->bindParam(":content", $content);
-		$stmt->bindParam(":author", $author);
+		$stmt->bindParam(":title", $args['title']);
+		$stmt->bindParam(":header", $args['header']);
+		$stmt->bindParam(":content", $args['content']);
+		$stmt->bindParam(":author", $args['author']);
 		$stmt->execute();
 
 		$id = $this->connector->getLastId();
@@ -88,15 +83,15 @@ class PostManager extends AbstractManager
 		return $id;
 	}
 
-	public function editPost($id, $title, $header, $content, $author)
+	public function editPost($args)
 	{
 		$sql = "UPDATE blog SET title = :title, header = :header, content = :content, author = :author WHERE id = :id";
 		$stmt = $this->connector->prepare($sql);
-		$stmt->bindParam(":id", $id);
-		$stmt->bindParam(":title", $title);
-		$stmt->bindParam(":header", $header);
-		$stmt->bindParam(":content", $content);
-		$stmt->bindParam(":author", $author);
+		$stmt->bindParam(":id", $args['id']);
+		$stmt->bindParam(":title", $args['title']);
+		$stmt->bindParam(":header", $args['header']);
+		$stmt->bindParam(":content", $args['content']);
+		$stmt->bindParam(":author", $args['author']);
 		$stmt->execute();
 	}
 }

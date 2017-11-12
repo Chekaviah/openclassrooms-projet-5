@@ -16,7 +16,7 @@ class Config
 
 	private function __construct()
 	{
-		$this->settings = require APP_ROOT.'config/mysql.php';
+		$this->settings = require APP_ROOT . 'config/config.php';
 	}
 
 	public function get($key)

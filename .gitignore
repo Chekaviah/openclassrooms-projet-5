@@ -1,3 +1,3 @@
 vendor/
 .idea/
-config/local_mysql.php
+config/local_config.php

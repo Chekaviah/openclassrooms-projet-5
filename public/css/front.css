@@ -321,6 +321,7 @@ section.success {
 	background: none;
 	box-shadow: none !important;
 	resize: none;
+	top: -8px;
 }
 
 .floating-label-form-group label {
@@ -609,7 +610,8 @@ fieldset[disabled] .btn-success.active {
 
 #post-create,
 #post-edit,
-#post-list {
+#post-list,
+#mail {
 	padding-top: 200px;
 }
 
@@ -639,6 +641,7 @@ fieldset[disabled] .btn-success.active {
 .post-link {
 	display: inline-block;
 	margin-top: 20px;
+	width: 100%;
 }
 
 .post-link:hover {
@@ -665,4 +668,12 @@ fieldset[disabled] .btn-success.active {
 .post-author {
 	color: #18BC9C;
 	text-decoration: underline;
+}
+
+#contact-form .btn-success {
+	margin-top: 20px;
+}
+
+#mail .btn {
+	margin-top: 70px;
 }

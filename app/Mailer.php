@@ -9,6 +9,7 @@ class Mailer
 {
 	private static $_instance;
 	private $mailer;
+	private $config;
 
 	public static function getInstance()
 	{
@@ -20,8 +21,28 @@ class Mailer
 
 	private function __construct()
 	{
-		$transport = new Swift_SmtpTransport();
+		$this->config = Config::getInstance();
+
+		$transport = (new Swift_SmtpTransport($this->config->get('MAIL_HOST'), $this->config->get('MAIL_PORT')))
+			->setUsername($this->config->get('MAIL_USERNAME'))
+			->setPassword($this->config->get('MAIL_PASSWORD'));
 		$this->mailer = new Swift_Mailer($transport);
+	}
+
+	public function prepareMail($args)
+	{
+		$from = filter_var($args['email'], FILTER_VALIDATE_EMAIL);
+		$name = $args['name'];
+		$content = $args['message'];
+		if(!$from)
+			return false;
+
+		$mail = (new Swift_Message('Formulaire de contact'))
+			->setFrom([$from => $name])
+			->setTo([$this->config->get('MAIL_TO')])
+			->setBody($content);
+
+		return $mail;
 	}
 
 	public function sendMail(Swift_Message $mail)

@@ -1,0 +1,30 @@
+
+
+{% extends "layout/front.twig" %}
+
+{% block title %}Formulaire de contact{% endblock %}
+
+{% block content %}
+    <section id="mail">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Formulaire de contact</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    {% if status %}
+                        <p class="text-center">Le mail a bien été envoyé.</p>
+                    {% else %}
+                        <p class="text-center">Le mail n'a pas été envoyé, le formulaire contient une erreur.</p>
+                    {% endif %}
+                    <div class="text-center">
+                        <a href="/" class="btn btn-success btn-lg">Retour à la page d'accueil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
