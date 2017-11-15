@@ -21,7 +21,7 @@ class PostManager extends AbstractManager
 	 */
 	public function getAllPosts()
 	{
-		$sql = "SELECT * FROM blog";
+		$sql = "SELECT * FROM blog ORDER BY last_update DESC";
 		$stmt = $this->connector->prepare($sql);
 		$stmt->execute();
 
